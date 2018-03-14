@@ -1,0 +1,23 @@
+version: "2"
+services:
+  owncloud:
+    image: owncloud:9
+    container_name: owncloud_9
+    restart: always
+    privileged: true
+    ports:
+      - "80:80"
+    volumes:
+      - ./data:/var/www/html/data
+    links: 
+      - mysql:mysql
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_5.7
+    ports: 
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin-local-1611
+    volumes:
+      - ../mysql:/var/lib/mysql
+    restart: always
